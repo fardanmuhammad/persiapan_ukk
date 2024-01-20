@@ -9,9 +9,8 @@ class pengguna extends Model
 {
     use HasFactory;
 
-    protected $table = 'penggunas';
-
-    protected $fillable = [ 'username', 'password', 'email',];
-
-    protected $hidden = ['password',];
+    protected $guarded = [
+        'id',
+        'created_at'
+    ];
 }

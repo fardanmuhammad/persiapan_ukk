@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\login;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +15,7 @@ use App\Http\Controllers\login;
 |
 */
 
-Route::get('/', [login::class, 'loginview'] );
+Route::get('/', [LoginController::class, 'loginView'] );
+Route::post('/', [LoginController::class, 'loginAction']);
+
+Route::get('/home', [HomeController::class, 'homeView']);
