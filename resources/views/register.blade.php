@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form</title>
-  <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="tetx/css" rel="stylesheet">
+  <title>Register Form</title>
   <style>
-      body {
+            body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
       margin: 0;
@@ -34,7 +33,7 @@
     } 
 
      .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 1px;
     } 
 
      .form-group label {
@@ -59,32 +58,41 @@
 
      .form-group input[type="submit"]:hover {
       background-color: #45a049;
-    }  */
+    }*/
   </style>
 </head>
 <body>
   
   <div class="login-container">
-    <h2>Login Form</h2>
+    <h2>Register Form</h2>
     <form class="login-form" action="" method="post">
       @csrf
       <div class="form-group">
-        <label for="username" style="color:black">Username</label>
+        <label for="username" style="color:black"><br></label>
         <input type="text" id="username" name="username" placeholder="Masukkan Username" required>
       </div>
       <div class="form-group">
-        <label for="password" style="color: black">Password</label>
-        <input type="password" id="password" name="password" placeholder="Masukkan Password">
+        <label for="email" style="color:black"><br></label>
+        <input type="email" onclick="changePlaceHolder()" id="email" name="email" placeholder="Masukkam Email" required>
+      </div>
+      <div class="form-group">
+        <label for="password"><br ></label>
+        <input type="password" id="password" name="password" placeholder="Masukkan Password" required>
       </div>
       <center>
-      <p> Belum Punya Akun? <br>
-      <a href="register">Yah Tinggal Regist</a></p>
-      </center>
+        <p> Punya Akun? <br>
+        <a href="/">Ywdah Login</a></p>
+        </center>
       <div class="form-group">
-          <input type="submit" value="Login">
-        </div>
+        <input type="submit" value="Registrasi">
       </div>
     </form>
   </div>
+  <script>
+    function changePlaceHolder(){
+      var inputElement = document.getElementById('email');
+      inputElement.placeholder = "example@gmail.com";
+    }
+  </script>
 </body>
 </html>

@@ -24,11 +24,13 @@ class LoginController extends Controller
         $type = gettype($row);
         if($type != "object"){
             if (count($row) == 0){
-                return view('login', ['status' => 404]);
+                return view('login', ['status' => 404, 'error' => 'Username not found.']);
+                
+
             }
         }
         else{
-            if (Hash::check($req -> password, $row -> password)){
+            if (Hash::check($req->password,$row->password)){
                 $req->session()->put('username', $row->username);
                 $req->session()->put('uid', $row->id);
                 return redirect()-> intended('/home');
@@ -38,6 +40,27 @@ class LoginController extends Controller
             }
         }
     }
+    public function logout(Request $request){
+        $request->session()->flush();
+        return redirect()->intended('/');
+    }
 
+    public function regist(Request $req){
+        pengguna::create([
+            'username'=>$req->username,
+            'email'=> $req->email,
+            'password'=>Hash::make($req->password)
+        ]);
+        return redirect()->intended('/home');
+    }
+
+    public function registView(Request $request){
+        if($request->session()->get('username') !=null && $request->session()->get('uid') != null){
+            return redirect()->intended('/home');
+        }
+        else{
+            return view('register');
+        }
+    }
 
 }

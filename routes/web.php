@@ -19,3 +19,9 @@ Route::get('/', [LoginController::class, 'loginView'] );
 Route::post('/', [LoginController::class, 'loginAction']);
 
 Route::get('/home', [HomeController::class, 'homeView']);
+
+Route::get('/logout', [LoginController::class, 'logout']);
+
+route::get('register', [LoginController::class, 'registView']);
+route::post('/register', [LoginController::class, 'regist']);
+
