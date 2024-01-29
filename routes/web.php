@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::get('/logout', [LoginController::class, 'logout']);
 route::get('register', [LoginController::class, 'registView']);
 route::post('/register', [LoginController::class, 'regist']);
 
+route::get('/profile', [ProfileController::class, 'profil']);
