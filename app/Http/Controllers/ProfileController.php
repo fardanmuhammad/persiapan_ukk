@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -15,5 +16,10 @@ class ProfileController extends Controller
         else{
             return view('profile');
         }
+    }
+
+    public function tampilprofile(Request $req){
+        $profile = DB::table('penggunas')->where('id',$req->session()->get('uid'))->select('penggunas.*')->get();
+        return view('home', compact('profile'));
     }
 }

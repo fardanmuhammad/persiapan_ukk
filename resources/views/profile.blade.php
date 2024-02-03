@@ -1,2 +1,2 @@
-test
-<a href="home">Back</a>
+<p> test </p>
+<a href="/home">Back</a>

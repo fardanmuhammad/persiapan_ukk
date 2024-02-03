@@ -51,7 +51,7 @@ class LoginController extends Controller
             'email'=> $req->email,
             'password'=>Hash::make($req->password)
         ]);
-        return redirect()->intended('/home');
+        return redirect()->intended('/');
     }
 
     public function registView(Request $request){

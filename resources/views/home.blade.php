@@ -19,6 +19,7 @@
     </style>
 <body>
   {{-- navbar --}}
+  {{-- @dd($profile) --}}
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Logo</a>
@@ -46,8 +47,13 @@
 
             {{-- Tampilan Profile --}}
             <div class="center-container">
-            <i class="fa-solid fa-user fa-5x fa-auto"></i>
+            <i class="fa-solid fa-user fa-5x fa-auto"></i><br>
+            <!-- resources/views/profile/index.blade.php -->
             </div>
+            <center><h2>{{ $profile[0]->username }}</h2><br></center>
+                <p>Email:  {{ $profile[0]->email }}</p><br>
+                <p>nama_lengkap:  {{ $profile[0]->nama_lengkap }}</p><br>
+                <p>alamat:  {{ $profile[0]->alamat }}</p><br>
             
 
 
@@ -57,7 +63,7 @@
                 My Postingan
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="/profile">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li>
                   <hr class="dropdown-divider">

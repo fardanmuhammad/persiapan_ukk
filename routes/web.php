@@ -26,4 +26,6 @@ Route::get('/logout', [LoginController::class, 'logout']);
 route::get('register', [LoginController::class, 'registView']);
 route::post('/register', [LoginController::class, 'regist']);
 
+route::get('/home', [ProfileController::class, 'tampilprofile']);
+
 route::get('/profile', [ProfileController::class, 'profil']);
