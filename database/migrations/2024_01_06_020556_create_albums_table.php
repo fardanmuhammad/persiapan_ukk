@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_album', 255);
-            $table->text('deskripsi', 255);
+            $table->string('nama_album', 255)->unique();
+            $table->enum('visibilitas',["Public","Follower","Private"]);
+            $table->integer('userid');
+            $table->text('deskripsi', 255)->nullable();
             $table->timestamps();
         });
     }
