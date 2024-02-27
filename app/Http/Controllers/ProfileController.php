@@ -18,8 +18,8 @@ class ProfileController extends Controller
         }
     }
 
-    public function tampilprofile(Request $req){
-        $profile = DB::table('penggunas')->where('id',$req->session()->get('uid'))->select('penggunas.*')->get();
-        return view('home', compact('profile'));
-    }
+    // public function tampilprofile(Request $req){
+    //     $profile = DB::table('penggunas')->where('id',$req->session()->get('uid'))->select('penggunas.*')->get();
+    //     return view('home', compact('profile'));
+    // }
 }

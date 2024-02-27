@@ -81,7 +81,7 @@
       </div>
       <center>
         <p> Punya Akun? <br>
-        <a href="/">Ywdah Login</a></p>
+        <a href="/login">Ywdah Login</a></p>
         </center>
       <div class="form-group">
         <input type="submit" value="Registrasi">

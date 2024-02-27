@@ -6,7 +6,6 @@
         <title>Beranda</title> 
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../fontawesome/css/all.min.css">
-        <link rel="stylesheet" href="{{asset('style/grid.css')}}" type="text/css">
 
     </head>
     <style>
@@ -15,14 +14,19 @@
         justify-content: center;
         height: 20vh;
       }
-      .test{
-        padding: 100px;
-      }
+
       
     </style>
 <body>
   {{-- navbar --}}
   {{-- @dd($profile) --}}
+  <div class="container">
+    <div class="fixed-bottom mb-4 me-5 text-end">
+      <button class="rounded-pill text-light border-0 text-center p-2 pe-1 fs-5" data-bs-toggle="modal" data-bs-target="#addPhoto" style="background-color: black;">
+        <i class="fa fa-image text-light"></i> Foto + 
+      </button>
+    </div>
+  </div>
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Logo</a>
@@ -34,7 +38,7 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Buat Album</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addPhoto" type="button">Upload Foto</a></li>
+            <li><a class="dropdown-item" href="#">Upload Foto</a></li>
             <!-- Add more dropdown items as needed -->
         </ul>
     </div>
@@ -75,15 +79,15 @@
                 My Postingan
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="/public">Public</a></li>
+                <li><a class="dropdown-item" href="/profile">Public</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="/follower">Follower</a></li>
+                <li><a class="dropdown-item" href="#">Follower</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="/private">Private</a></li>
+                <li><a class="dropdown-item" href="#">Private</a></li>
               </ul>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -92,10 +96,46 @@
       </div>
     </div>
   </nav>
+      {{-- end navbar --}}
+      <div style="width:80%">
+        <div class="row m-2 mt-3 ms-3">
+          <div class="row">
+            <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <h2>{{ $namaAlbum }}</h2>
+                {{-- <a href="/create-album" class="text-decoration-none"><h5 class="rounded-pill p-2 text-light text-center" style="background-color: black">Tambah +</h5></a> --}}
+                <button type="button" class="rounded-pill text-light border-0 text-center p-1 fs-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: black">
+                  Tambah +
+                </button>
+              </div>
+            </div>
+            <div class="row column-gap-3">
+          <div class="container">
+            <div class="row">
+                @foreach ($detailFoto as $a)
+                <div class="col-md-4 grid-item">
+                  <div class="card">
+                    <img src="@php
+                    echo asset($a['lokasi_file']);
+                  @endphp" class="card-img-top" alt="...">
+                    <div class="card-body">
+                       <h5 class="card-title">Ini judul ceritanya</h5>
+                       <p class="card-text text-truncate">{{$a['deskripsi']}}</p>
+                       <!-- Tombol, Tautan, atau elemen lainnya -->
+                    </div>
+                 </div>
+              </div>
+                @endforeach
+            </div>
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-{{-- Buat Folder --}}
+    {{-- Buat Folder --}}
      {{-- Modal --}}
-     <div class="test">
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <form action="/create-album" method="POST">
@@ -141,12 +181,12 @@
         </div>              
         <label for="AlbumName">Visibilitas</label>
         <select name="albumName" class="form-select">
-          @foreach ($album as $a)
+          {{-- @foreach ($album as $a)
             <option value="{{ $a['nama_album'] }}!!!{{ $a['id'] }}">@php
               echo explode("@", $a['nama_album'])[0];
             @endphp 
             ({{ $a['visibilitas'] }})</option>
-          @endforeach
+          @endforeach --}}
         </select>
       </div>
       <div class="modal-footer">
@@ -157,12 +197,12 @@
     </div>
   </div>
 </div>
+
+
  {{-- end modal 2 --}}
 
- 
 
-
-
-
- <script src= "../bootstrap/js/bootstrap.bundle.min.js"> </script>  
+    <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
 </body>
+</html>

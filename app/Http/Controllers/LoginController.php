@@ -42,7 +42,7 @@ class LoginController extends Controller
     }
     public function logout(Request $request){
         $request->session()->flush();
-        return redirect()->intended('/');
+        return redirect()->intended('/login');
     }
 
     public function regist(Request $req){
@@ -51,7 +51,7 @@ class LoginController extends Controller
             'email'=> $req->email,
             'password'=>Hash::make($req->password)
         ]);
-        return redirect()->intended('/');
+        return redirect()->intended('/login');
     }
 
     public function registView(Request $request){
