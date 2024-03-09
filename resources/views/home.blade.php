@@ -15,8 +15,8 @@
         justify-content: center;
         height: 20vh;
       }
-      .test{
-        padding: 100px;
+      .gmbr{
+        padding-top: 70px;
       }
       
     </style>
@@ -58,18 +58,20 @@
 
 
             {{-- Tampilan Profile --}}
-            {{-- <div class="center-container">
+             <div class="center-container">
             <i class="fa-solid fa-user fa-5x fa-auto"></i><br>
             <!-- resources/views/profile/index.blade.php -->
             </div>
-            <center><h4 style= "margin-top:-30px; margin-bottom:30pxpx">{{ $profile[0]->username }}</h2><br></center>
+            <h4 align="center" style= "margin-top:-30px; margin-bottom:30pxpx">{{ $profile[0]->username }}</h2><br>
                 <p style="margin-bottom:-5px ">Email:  {{ $profile[0]->email }}</p><br>
                 <p style="margin-bottom:-5px ">Nama:  {{ $profile[0]->nama_lengkap }}</p><br>
                 <p style="margin-bottom:-5px ">Alamat:  {{ $profile[0]->alamat }}</p><br>
-             --}}
+            
 
 
-
+             <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-bottom:5px">
                 My Postingan
@@ -159,7 +161,22 @@
 </div>
  {{-- end modal 2 --}}
 
- 
+ <div class="gmbr">
+  <div class="ms-3 me-3 mt-3">
+    <section class="flex" id="photos">
+      @foreach ($foto as $a)
+          <a class="text-decoration-none" href="detail/{{$a['id']}}">
+            <div class="overflow-y-hidden">
+              <img src="@php
+            echo asset($a['lokasi_file']);
+          @endphp" class="img-fluid border" alt="..." style="border-radius: 25px">
+          <h6 class="text-truncate text-dark fw-bold ps-2"> deskripsi</h6>
+            </div>
+          </a>
+      @endforeach
+    </section>
+  </div>
+</div>
 
 
 

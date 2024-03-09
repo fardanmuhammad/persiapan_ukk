@@ -20,9 +20,12 @@ class HomeController extends Controller
             return redirect()->intended('/login');
         }
         else{   
-            $album = Album::get()->where('userid', $req->session()->get('uid'));
+            $album = Album::where('userid', $req->session()->get('uid'))->get();
+            $profile = DB::table('penggunas')->where('id', $req->session()->get('uid'))->select('penggunas.*')->get();
             return view('home', [
                 'album' => $album,
+                'foto' => Foto::orderBy(DB::raw('RAND()'))->get(),
+                'profile' => $profile
             ]);
         }
     }

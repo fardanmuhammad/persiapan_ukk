@@ -59,8 +59,8 @@ class AlbumController extends Controller {
                 foto::create([
                     'judul_foto' => $req->file("foto")->getClientOriginalName(),
                     'lokasi_file' => "uploads/".explode("!!!", $req->albumName)[0]."/".$req->file("foto")->getClientOriginalName(),
-                    'albumid' => explode("!!!", $req->albumName)[1],
-                    'userid' => $req->session()->get('uid')
+                    'albumId' => explode("!!!", $req->albumName)[1],
+                    'userId' => $req->session()->get('uid')
                 ]);
                 return redirect()->intended('/home')->with([
                     'status' => 200

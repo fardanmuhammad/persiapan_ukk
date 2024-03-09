@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('komentars', function (Blueprint $table) {
             $table->id();
+            $table->integer('fotoId');
+            $table->integer('userId');
+            $table->string('komentarType');
             $table->text('komentar', 255);
             $table->timestamps();
         });

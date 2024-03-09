@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\DetailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
@@ -23,6 +24,13 @@ Route::post('/login', [LoginController::class, 'loginAction']);
 
 //BERANDA(GUEST)
 Route::get('/', [HomeController::class, 'berandaview']);
+Route::get('detail/{id}', [DetailController::class, 'detailFoto']);
+
+//komen
+Route::post('/detail/{id}/komentar', [DetailController::class, 'addKomentar'])->name('addKomen.action');
+//like
+Route::post('/detail/{id}/like', [DetailController::class, 'addLike'])->name('like.action');
+Route::delete('/detail/{id}/unlike', [DetailController::class, 'unLike'])->name('unlike.action');
 
 
 //HOME
@@ -36,8 +44,8 @@ route::get('/register', [LoginController::class, 'registView']);
 route::post('/register', [LoginController::class, 'regist']);
 
 //profile
-// route::get('/home', [ProfileController::class, 'tampilprofile']);
-route::get('/profile', [ProfileController::class, 'profil']);
+route::get('/profile', [ProfileController::class, 'tampilprofile']);
+// route::get('/profile', [ProfileController::class, 'profil']);
 
 //albumview
 Route::get('/album/{id_album}', [AlbumController::class, 'albumview']);

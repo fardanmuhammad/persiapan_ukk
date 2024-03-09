@@ -76,7 +76,7 @@
               <img src="@php
             echo asset($a['lokasi_file']);
           @endphp" class="img-fluid border" alt="..." style="border-radius: 25px">
-          <h6 class="text-truncate text-dark fw-bold ps-2">Ini deskripsi</h6>
+          <h6 class="text-truncate text-dark fw-bold ps-2">deskripsi</h6>
             </div>
           </a>
       @endforeach

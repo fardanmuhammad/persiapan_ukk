@@ -58,13 +58,43 @@
 
      .form-group input[type="submit"]:hover {
       background-color: #45a049;
-    }*/
+    }
+    .success-message {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .error-message {
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
   </style>
 </head>
 <body>
   
   <div class="login-container">
     <h2>Register Form</h2>
+    
+    @if(session('status') == 'success')
+    <div class="success-message">
+      {{ session('message') }}
+    </div>
+  @endif
+
+  <!-- Bagian untuk menampilkan pesan kesalahan -->
+  @if(session('status') == 'error')
+    <div class="error-message">
+      {{ session('message') }}
+    </div>
+  @endif
     <form class="login-form" action="" method="post">
       @csrf
       <div class="form-group">
@@ -96,3 +126,6 @@
   </script>
 </body>
 </html>
+
+
+
