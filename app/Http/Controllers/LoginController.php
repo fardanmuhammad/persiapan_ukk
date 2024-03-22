@@ -43,17 +43,19 @@ class LoginController extends Controller
     }
     public function logout(Request $request){
         $request->session()->flush();
-        return redirect()->intended('/login');
+        return redirect()->intended('/');
     }
     
     
 
     public function regist(Request $req){
+        $nama = explode("@", $req->email);
         try {
             pengguna::create([
                 'username' => $req->username,
                 'email' => $req->email,
-                'password' => Hash::make($req->password)
+                'password' => Hash::make($req->password),
+                'nama_lengkap' => $nama[0]
             ]);
     
             return redirect('/login')->with([

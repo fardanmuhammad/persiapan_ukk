@@ -10,12 +10,23 @@ use Illuminate\Support\Facades\DB;
 
 class DetailController extends Controller
 {
-    public function detailFoto($id){
-        $foto = Foto::with(['komentars', 'like_fotos'])->firstWhere('id', $id);
+    public function detailFoto(Request $req, $id){
+        $foto = Foto::with(['komentars', 'likes'])->firstWhere('id', $id);
+        $ceklike = false;
+        foreach($foto->likes as $like){
+            if($req->session()->get('uid') == $like->userId){
+                $ceklike = true;
+            }
+            elseif($req->session()->get('uid') == $like->userId){
+                $ceklike = false;
+            }
+        }
         return view('detailFoto', [
-            'foto' => $foto
+            'foto' => $foto,
+            'ceklike' => $ceklike
         ]);
     }
+    
     public function addLike(Request $req, $id){
         $isChecked = $req->input('is_checked') == "true" ? true : false;
         if ($isChecked == true){
@@ -41,5 +52,9 @@ class DetailController extends Controller
         return response()->json([
             'message' => "sukses"
         ], 200);
+}
+public function downloadFile(Request $req, $id){
+    $lokasi_file = Foto::firstWhere('id', $id);
+    return response()->download($lokasi_file['lokasi_file']);
 }
 }

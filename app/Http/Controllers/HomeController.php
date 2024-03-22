@@ -22,17 +22,23 @@ class HomeController extends Controller
         else{   
             $album = Album::where('userid', $req->session()->get('uid'))->get();
             $profile = DB::table('penggunas')->where('id', $req->session()->get('uid'))->select('penggunas.*')->get();
+            $rawFoto = Foto::with('albums')->whereHas('albums', function($query){
+                $query->where('visibilitas', '=', 'Public');
+            })->inRandomOrder()->get();
             return view('home', [
                 'album' => $album,
-                'foto' => Foto::orderBy(DB::raw('RAND()'))->get(),
+                'foto' => $rawFoto,
                 'profile' => $profile
             ]);
         }
     }
 
     public function berandaview(request $req){
+        $rawFoto = Foto::with('albums')->whereHas('albums', function($query){
+            $query->where('visibilitas', '=', 'Public');
+        })->inRandomOrder()->get();
         return view('beranda', [
-            'foto' => Foto::orderBy(DB::raw('RAND()'))->get()
+            'foto' => $rawFoto
         ]);
     }
     public function getip(Request $req){

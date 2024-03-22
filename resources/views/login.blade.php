@@ -77,8 +77,8 @@
         <input type="password" id="password" name="password" placeholder="Masukkan Password">
       </div>
       <center>
-      <p> Belum Punya Akun? <br>
-      <a href="register">Yah Tinggal Regist</a></p>
+      <p> Belum Mempunyai Akun? <br>
+      <a href="register">Silahkan Registrasi Terlebih Dahulu</a></p>
       </center>
       <div class="form-group">
           <input type="submit" value="Login">

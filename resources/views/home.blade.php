@@ -23,28 +23,32 @@
 <body>
   {{-- navbar --}}
   {{-- @dd($profile) --}}
-  <nav class="navbar navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-dark bg-dark fixed-top" >
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Logo</a>
+      <a class="navbar-brand" href="#"><img src="{{ asset('mylogo.jpeg') }}" width="50px" style="border-radius: 50%"></a>
       <div class="me-auto d-flex "> 
-      <a class="nav-item ms-3" href="#" style="color: aliceblue; font-size:25px; text-decoration:none";>Beranda</a>
+      <a class="nav-item ms-3" href="home" style="color: aliceblue; font-size:25px; text-decoration:none";>Beranda</a>
       <div class="nav-item ms-3 dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: aliceblue; font-size:25px; text-decoration:none;">
             Buat
         </a>
         <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Buat Album</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addAlbum" type="button">Buat Album</a></li>
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addPhoto" type="button">Upload Foto</a></li>
             <!-- Add more dropdown items as needed -->
         </ul>
     </div>
       </div>
       <div class="d-flex">
-      <form class="d-flex mt-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-success" type="submit">Search</button>
+      <form class="d-flex mt-3" role="search" method="" action="">
+        <div class="input-group">
+        
+        <a class="btn btn-primary" type="submit" style="margin-right: 20px;" href="search">Search</a>
+        </div>
       </form>
       </div>
+
+      {{-- drawer --}}
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -65,13 +69,8 @@
             <h4 align="center" style= "margin-top:-30px; margin-bottom:30pxpx">{{ $profile[0]->username }}</h2><br>
                 <p style="margin-bottom:-5px ">Email:  {{ $profile[0]->email }}</p><br>
                 <p style="margin-bottom:-5px ">Nama:  {{ $profile[0]->nama_lengkap }}</p><br>
-                <p style="margin-bottom:-5px ">Alamat:  {{ $profile[0]->alamat }}</p><br>
+                {{-- <p style="margin-bottom:-5px ">Alamat:  {{ $profile[0]->alamat }}</p><br> --}}
             
-
-
-             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
-            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-bottom:5px">
                 My Postingan
@@ -81,9 +80,6 @@
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="/follower">Follower</a></li>
-                <li>
-                  <hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item" href="/private">Private</a></li>
               </ul>
@@ -98,7 +94,7 @@
 {{-- Buat Folder --}}
      {{-- Modal --}}
      <div class="test">
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="addAlbum" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <form action="/create-album" method="POST">
     <div class="modal-content">
@@ -112,7 +108,7 @@
         <label for="AlbumName">Visibilitas</label>
         <select name="visible" class="form-select">
           <option value="Public">Public</option>
-          <option value="Follower">Follower</option>
+          {{-- <option value="Follower">Follower</option> --}}
           <option value="Private">Private</option>
         </select>
       </div>
@@ -139,9 +135,25 @@
       <div class="modal-body container">
         <div class="mb-3">
           <label for="formFile" class="form-label">Default file input example</label>
-          <input class="form-control" type="file" id="formFile" name="foto">
-        </div>              
-        <label for="AlbumName">Visibilitas</label>
+          <input class="form-control" type="file" id="formFile" name="foto" required>
+        </div>
+        <div class="mb-3">
+          <label for="formDeskripsi" class="form-label">Deskripsi Foto</label>
+          <textarea class="form-control" id="formDeskripsi" name="deskripsi" rows="3" required></textarea>  
+        </div>                          
+        <div class="row">
+          <p>pilih visibilitas </p>
+          <div class="col">
+            <label for="AlbumVisibilityPublic">Public</label>
+            <input type="radio" id="AlbumVisibilityPublic" name="albumVisibility" value="public">
+          </div>
+          <div class="col">
+            <label for="AlbumVisibilityPrivate">Private</label>
+            <input type="radio" id="AlbumVisibilityPrivate" name="albumVisibility" value="private">
+          </div>
+        </div>
+        <br>
+        <label for="AlbumName">Pilih Album</label>
         <select name="albumName" class="form-select">
           @foreach ($album as $a)
             <option value="{{ $a['nama_album'] }}!!!{{ $a['id'] }}">@php
@@ -170,7 +182,7 @@
               <img src="@php
             echo asset($a['lokasi_file']);
           @endphp" class="img-fluid border" alt="..." style="border-radius: 25px">
-          <h6 class="text-truncate text-dark fw-bold ps-2"> deskripsi</h6>
+          <h6 class="text-truncate text-dark fw-bold ps-2">{{ $a['deskripsi_foto'] }}</h6>
             </div>
           </a>
       @endforeach

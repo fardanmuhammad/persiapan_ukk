@@ -18,8 +18,10 @@ class VisibilitasController extends Controller
         ->where('visibilitas', $visibility) 
         ->where('userid', $req->session()->get('uid'))
         ->get();
+        $profile = DB::table('penggunas')->where('id', $req->session()->get('uid'))->select('penggunas.*')->get();
         return view('private', [
             'album' => $album,
+            'profile' => $profile
         ]);
     }   
     
@@ -44,8 +46,10 @@ class VisibilitasController extends Controller
             ->where('visibilitas', $visibility) 
             ->where('userid', $req->session()->get('uid'))
             ->get();
+            $profile = DB::table('penggunas')->where('id', $req->session()->get('uid'))->select('penggunas.*')->get();
             return view('public', [
                 'album' => $album,
+                'profile' => $profile
             ]);
         }   
     }

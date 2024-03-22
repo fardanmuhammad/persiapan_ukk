@@ -36,21 +36,30 @@
                     echo asset($foto['lokasi_file']);
                 @endphp" alt="" class="img-fluid" style="border-radius: 25px"></div>
                 <div class="container col">
-                    <p class="fw-bold fs-4">ini deskripsi</p>
-                    <p class="fs-5">Posted By</p>
+                    <p class="fs-5">Diunggah Oleh: {{$foto->pengguna->username}}</p>
+                    <p class="fw-bold fs-4">{{ $foto['deskripsi_foto'] }}</p>
                     {{-- @dd($foto) --}}
-                    <p class="fs-6">{{$foto->pengguna->username}}</p>
                     @if (Session::get('uid') != null && Session::get('username') != null)
                         <div class="row g-2">
                         <div class="col">
                             <label class="form-check-label">
+                                @if($ceklike == false)
                                 <input type="checkbox" name="like" id="likeId" style="opacity: 0">
+                                @elseif($ceklike == true)
+                                <input type="checkbox" name="like" id="likeId" style="opacity: 0" checked>
+                                @endif
                                     <div class="row g-1">
+                                        @if($ceklike == false)
                                         <div class="col pointer-set" onclick="changeIcon()">
                                             <i class="material-icons material-symbols-outlined" id="likE">favorite</i>
                                         </div>
+                                        @elseif($ceklike == true)
+                                        <div class="col pointer-set" onclick="changeIcon()">
+                                            <i class="material-icons" id="likE">favorite</i>
+                                        </div>
+                                        @endif
                                         <div class="col">
-                                            <p id="likeCount">{{$foto->like_fotos->count()}}</p>
+                                            <p id="likeCount">{{$foto->likes->count()}}</p>
                                         </div>
                                 </div>
                             </label>
@@ -58,19 +67,20 @@
                         <div class="col">
                             <h6 style="opacity: 0">asd</h6>
                             <label class="form-check-label">
-                                <a class="text-decoration-none text-dark" href="#komentar">
+                                <a class="text-decoration-none text-dark" href="/download/{{$foto->id}}">
                                     <div class="row g-1">
                                         <div class="col">
-                                            <i class="material-icons material-symbols-outlined">comment</i>
+                                            <i class="fas fa-download"></i>
                                         </div>
                                         <div class="col">
-                                            <p>Komentar</p>
+                                            <p>Download</p>
                                         </div>
                                     </div>
                                 </a>
                             </label>
                         </div>
                     </div>
+
                     <div class="container border-top border-2 overflow-auto" style="max-height: 450px" id="komenContainer">
                     @foreach ($foto->komentars as $a)
                         <p class="fs-6 fw-bold mt-3">{{$a->pengguna->username}}</p>
@@ -127,50 +137,50 @@
             }
         }
     </script>
-    <script>
-        $("#likeId").change(function(){
-            var csrfToken = '{{ csrf_token() }}';
-            var isChecked = $(this).prop('checked');
-            var likeCount = parseInt(document.getElementById("likeCount").textContent);
+<script>
+    $("#likeId").change(function(){
+        var csrfToken = '{{ csrf_token() }}';
+        var isChecked = $(this).prop('checked');
+        var likeCount = parseInt(document.getElementById("likeCount").textContent);
 
-            if(isChecked == true) {
-                document.getElementById("likeCount").textContent = likeCount +=1;
-                $.ajax({
-            url: "{{route('like.action', ['id' => $foto->id])}}",
-            method: "POST",
-            data: {
-                _token: csrfToken,
-                is_checked: isChecked,
-            },
-            success: function(response){
-                console.log(response.message);
-                console.log(isChecked);
-            },
-            error: function(xhr){
-                console.log("gagal");
-            }
-        });
-            }
-            else {
-                document.getElementById("likeCount").textContent = likeCount -=1;
-                $.ajax({
-            url: "{{route('unlike.action', ['id' => $foto->id])}}",
-            method: "POST",
-            data: {
-                _method: "DELETE",
-                _token: csrfToken,
-                is_checked: isChecked,
-            },
-            success: function(response){
-                console.log(response.message);
-                console.log(isChecked);
-            },
-            error: function(xhr){
-                console.log("gagal");
-            }
-        });
-            }
-        })
-    </script>
+        if(isChecked == true) {
+            document.getElementById("likeCount").textContent = likeCount +=1;
+            $.ajax({
+        url: "{{route('like.action', ['id' => $foto->id])}}",
+        method: "POST",
+        data: {
+            _token: csrfToken,
+            is_checked: isChecked,
+        },
+        success: function(response){
+            console.log(response.message);
+            console.log(isChecked);
+        },
+        error: function(xhr){
+            console.log("gagal");
+        }
+    });
+        }
+        else {
+            document.getElementById("likeCount").textContent = likeCount -=1;
+            $.ajax({
+        url: "{{route('unlike.action', ['id' => $foto->id])}}",
+        method: "POST",
+        data: {
+            _method: "DELETE",
+            _token: csrfToken,
+            is_checked: isChecked,
+        },
+        success: function(response){
+            console.log(response.message);
+            console.log(isChecked);
+        },
+        error: function(xhr){
+            console.log("gagal");
+        }
+    });
+        }
+    })
+</script>
 </body>
 </html>

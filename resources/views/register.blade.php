@@ -110,8 +110,8 @@
         <input type="password" id="password" name="password" placeholder="Masukkan Password" required>
       </div>
       <center>
-        <p> Punya Akun? <br>
-        <a href="/login">Ywdah Login</a></p>
+        <p> Sudah Mempunyai Akun? <br>
+        <a href="/login">Silahkan Login</a></p>
         </center>
       <div class="form-group">
         <input type="submit" value="Registrasi">

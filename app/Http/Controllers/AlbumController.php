@@ -12,11 +12,13 @@ use App\Models\foto;
 class AlbumController extends Controller {
 
     public function albumView(Request $req, $id_album){
-        $detailFoto = Foto::get()->where('albumid', $id_album);
+        $detailFoto = Foto::get()->where('albumId', $id_album);
         $album = Album::firstWhere('id', $id_album);
         $namaAlbum = explode("@", $album['nama_album'])[0];
         return view('detailAlbum', [
             'namaAlbum' => $namaAlbum,
+            'albumId' => $id_album,
+            'visible' => $album->visibilits,
             'detailFoto' => $detailFoto
         ]);
     }
@@ -58,6 +60,7 @@ class AlbumController extends Controller {
                 $file->move("uploads/".explode("!!!",$req->albumName)[0], $file->getClientOriginalName());
                 foto::create([
                     'judul_foto' => $req->file("foto")->getClientOriginalName(),
+                    'deskripsi_foto' => $req->deskripsi,
                     'lokasi_file' => "uploads/".explode("!!!", $req->albumName)[0]."/".$req->file("foto")->getClientOriginalName(),
                     'albumId' => explode("!!!", $req->albumName)[1],
                     'userId' => $req->session()->get('uid')
@@ -74,5 +77,47 @@ class AlbumController extends Controller {
                 'status' => 403
             ]);
         }
+    }
+
+    public function editAlbum(Request $req){
+        $id = $req->idAlbumm;
+        $albumName = $req->namaAlbum;
+        $deskripsi = $req->deskripsi ?? "";
+        $visible = $req->visibilitas;
+        $album = Album::firstWhere('id', $id);
+
+        // rename("album_user/".$album->nama_album, "album_user/".$albumName."@".$req->session()->get('username'));
+
+        // $album->nama_album = $albumName."@".$req->session()->get('username');
+        $album->visibilitas = $visible;
+        $album->deskripsi = $deskripsi;
+        
+        $album->save();
+
+        return back();
+    }
+
+    public function deleteAlbum(Request $req){
+        $id = $req->idAlbum;
+        $album = Album::firstWhere('id', $id);
+        $pathAlbum = system('cd')."\\uploads\\".$album->nama_album;
+        File::cleanDirectory($pathAlbum);
+        rmdir($pathAlbum);
+        $foto = Foto::where('albumId', $id)->get();
+
+        if($foto->count() >= 1){
+            foreach($foto as $a){
+                Foto::firstWhere('id', $a['id'])->delete();
+            }
+        }
+
+        $album->delete();
+        return back();
+    }
+    public function hapusFoto(Request $req, $id){
+        $foto = foto::firstwhere('id' ,$id);
+        $foto->delete();
+        unlink($foto->lokasi_file);
+        return  back();
     }
 }

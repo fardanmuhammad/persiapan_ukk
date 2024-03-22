@@ -10,6 +10,19 @@
 
     </head>
     <style>
+      .nav-button {
+  background-color: rgb(0, 89, 255);
+  color: white;
+  border-radius: 10%;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-button:hover {
+  background-color: rgb(0, 59, 252);
+}
+
       .center-container{
         display: flex;
         justify-content: center;
@@ -26,44 +39,44 @@
   {{-- @dd($profile) --}}
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Logo</a>
+      <a class="navbar-brand" href="/"><img src="{{ asset('mylogo.jpeg') }}" width="50px" style="border-radius: 50%"></a>
       <div class="me-auto d-flex "> 
-      <a class="nav-item ms-3" href="#" style="color: aliceblue; font-size:25px; text-decoration:none";>Beranda</a>
-      <div class="nav-item ms-3 dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: aliceblue; font-size:25px; text-decoration:none;">
-            Buat
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Buat Album</a></li>
-            <li><a class="dropdown-item" href="#">Upload Foto</a></li>
-            <!-- Add more dropdown items as needed -->
-        </ul>
-    </div>
+      <a class="nav-item ms-3" href="/" style="color: aliceblue; font-size:25px; text-decoration:none";>Beranda</a>
       </div>
       <div class="d-flex">
-      <form class="d-flex mt-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-success" type="submit">Search</button>
-      </form>
-      </div>
+        <form class="d-flex mt-3" role="search" method="" action="">
+          <div class="input-group">
+          
+          <a class="btn btn-primary" type="submit" style="margin-right: 20px;" href="search">Search</a>
+          </div>
+        </form>
+        </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MY PROFILE</h5>
+          {{-- <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MY PROFILE</h5> --}}
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">  
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
-              </li>
-               
+            <center> 
+              <p> Sudah Mempunyai Akun?<br>
+                silahkan Login.</p>
+            <li class="nav-item">
+              <button class="nav-button" onclick="window.location.href='/login'">Login</button>
+            </li>
+            <br><br>
+            <li class="nav-item">
+              <p> Belum Mempunyai Akun?<br>
+                Silahkan Register Terlebih Dahulu.</p>
+              <button class="nav-button" onclick="window.location.href='/register'">Register</button>
+            </li>
+            </center>
+          </ul>
         </div>
+        
       </div>
     </div>
   </nav>
