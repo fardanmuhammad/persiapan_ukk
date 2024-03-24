@@ -5,7 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class like extends Model
+class Like extends Model
 {
     use HasFactory;
+    protected $guarded = [
+        'id',
+        'created_at'
+    ];
+    public function likefotoable(){
+        return $this->morphTo();
+    }
 }

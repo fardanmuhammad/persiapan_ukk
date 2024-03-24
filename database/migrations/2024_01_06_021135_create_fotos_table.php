@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('judul_foto', 255);
             $table->text('deskripsi_foto', 255)->nullable();
             $table->string('lokasi_file', 255);
-            $table->integer('albumid');
-            $table->integer('userid');
+            $table->integer('albumId');
+            $table->integer('userId');
             $table->timestamps();
             
         });

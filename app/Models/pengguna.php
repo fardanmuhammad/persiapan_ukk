@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pengguna extends Model
+class Pengguna extends Model
 {
     use HasFactory;
 
@@ -13,4 +13,11 @@ class pengguna extends Model
         'id',
         'created_at'
     ];
+
+    public function fotos(){
+        return $this->hasMany(Foto::class, 'userId', 'id');
+    }
+    public function komentars(){
+        return $this->hasMany(Komentar::class, 'userId', 'id');
+    }
 }

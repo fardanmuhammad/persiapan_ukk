@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\pengguna;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -42,18 +43,33 @@ class LoginController extends Controller
     }
     public function logout(Request $request){
         $request->session()->flush();
-        return redirect()->intended('/login');
+        return redirect()->intended('/');
     }
+    
+    
 
     public function regist(Request $req){
-        pengguna::create([
-            'username'=>$req->username,
-            'email'=> $req->email,
-            'password'=>Hash::make($req->password)
-        ]);
-        return redirect()->intended('/login');
+        $nama = explode("@", $req->email);
+        try {
+            pengguna::create([
+                'username' => $req->username,
+                'email' => $req->email,
+                'password' => Hash::make($req->password),
+                'nama_lengkap' => $nama[0]
+            ]);
+    
+            return redirect('/login')->with([
+                'status' => 'success',
+                'message' => 'Akun Berhasil Dibuat'
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return view('register', [
+                'status' => 'error',
+                'message' => 'Username sudah digunakan'
+            ]);
+        }
     }
-
+    
     public function registView(Request $request){
         if($request->session()->get('username') !=null && $request->session()->get('uid') != null){
             return redirect()->intended('/home');
