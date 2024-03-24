@@ -47,7 +47,7 @@
         <form class="d-flex mt-3" role="search" method="" action="">
           <div class="input-group">
           
-          <a class="btn btn-primary" type="submit" style="margin-right: 20px;" href="search">Search</a>
+          {{-- <a class="btn btn-primary" type="submit" style="margin-right: 20px;" href="search">Search</a> --}}
           </div>
         </form>
         </div>
@@ -89,7 +89,7 @@
               <img src="@php
             echo asset($a['lokasi_file']);
           @endphp" class="img-fluid border" alt="..." style="border-radius: 25px">
-          <h6 class="text-truncate text-dark fw-bold ps-2">deskripsi</h6>
+          <h6 class="text-truncate text-dark fw-bold ps-2">{{ $a['deskripsi_foto'] }}</h6>
             </div>
           </a>
       @endforeach

@@ -62,7 +62,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><img src="{{ asset('mylogo.jpeg') }}" width="50px" style="border-radius: 50%"></a>
       <div class="me-auto d-flex "> 
-      <a class="nav-item ms-3" href="#" style="color: aliceblue; font-size:25px; text-decoration:none";>Beranda</a>
+      <a class="nav-item ms-3" href="/home" style="color: aliceblue; font-size:25px; text-decoration:none";>Beranda</a>
       <div class="nav-item ms-3 dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: aliceblue; font-size:25px; text-decoration:none;">
             Buat

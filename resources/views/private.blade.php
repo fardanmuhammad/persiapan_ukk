@@ -41,9 +41,9 @@
 
 <nav class="navbar navbar-dark bg-dark fixed-top" style="padding-top: 1px">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="#"><img src="{{ asset('mylogo.jpeg') }}" width="50px" style="border-radius: 50%"></a>
     <div class="me-auto d-flex "> 
-    <a class="nav-item ms-3" href="#" style="color: aliceblue; font-size:25px; text-decoration:none";>Beranda</a>
+    <a class="nav-item ms-3" href="/home" style="color: aliceblue; font-size:25px; text-decoration:none";>Beranda</a>
     <div class="nav-item ms-3 dropdown">
       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: aliceblue; font-size:25px; text-decoration:none;">
           Buat
@@ -56,10 +56,7 @@
   </div>
     </div>
     <div class="d-flex">
-    <form class="d-flex mt-3" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-success" type="submit">Search</button>
-    </form>
+      <a class="btn btn-primary" type="submit" style="margin-right: 20px;" href="search">Search</a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -84,13 +81,12 @@
           <h4 align="center" style= "margin-top:-30px; margin-bottom:30pxpx">{{ $profile[0]->username }}</h2><br>
               <p style="margin-bottom:-5px ">Email:  {{ $profile[0]->email }}</p><br>
               <p style="margin-bottom:-5px ">Nama:  {{ $profile[0]->nama_lengkap }}</p><br>
-              <p style="margin-bottom:-5px ">Alamat:  {{ $profile[0]->alamat }}</p><br>
           
 
 
-           <li class="nav-item">
+           {{-- <li class="nav-item">
             <a class="nav-link" href="/profile">Profile</a>
-          </li>
+          </li> --}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-bottom:5px">
               My Postingan

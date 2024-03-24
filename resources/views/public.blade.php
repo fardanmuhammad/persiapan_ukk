@@ -70,7 +70,6 @@
       </div>
       <div class="d-flex">
         <a class="btn btn-primary" type="submit" style="margin-right: 20px;" href="search">Search</a>
-      </form>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -92,13 +91,12 @@
             <h4 align="center" style= "margin-top:-30px; margin-bottom:30pxpx">{{ $profile[0]->username }}</h2><br>
                 <p style="margin-bottom:-5px ">Email:  {{ $profile[0]->email }}</p><br>
                 <p style="margin-bottom:-5px ">Nama:  {{ $profile[0]->nama_lengkap }}</p><br>
-                <p style="margin-bottom:-5px ">Alamat:  {{ $profile[0]->alamat }}</p><br>
             
 
 
-             <li class="nav-item">
+             {{-- <li class="nav-item">
               <a class="nav-link" href="/profile">Profile</a>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-bottom:5px">
                 My Postingan
